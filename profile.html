@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editable User Profile</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1>User Profile</h1>
+    </div>
+    <div class="profile-content">
+      <div class="profile-picture">
+        <img id="profile-pic" src="p1.png" alt="Profile Picture">
+        <label for="upload-pic" class="upload-label">Change Picture</label>
+        <input type="file" id="upload-pic" accept="image/*" style="display: none;">
+      </div>
+      <div class="profile-details">
+        <p>
+          <strong>Name:</strong>
+          <input type="text" id="name" value="John Doe" class="editable">
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <input type="email" id="email" value="john.doe@example.com" class="editable">
+        </p>
+        <p>
+          <strong>Location:</strong>
+          <input type="text" id="location" value="New York, USA" class="editable">
+        </p>
+        <p>
+          <strong>Bio:</strong>
+          <textarea id="bio" class="editable">Passionate about web development and design!</textarea>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to handle profile picture change
+    document.getElementById('upload-pic').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profile-pic').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Optional: Save changes (for demonstration purposes)
+    document.querySelectorAll('.editable').forEach(element => {
+      element.addEventListener('input', function() {
+        console.log(`Updated ${element.id}: ${element.value}`);
+      });
+    });
+  </script>
+</body>
+</html>
